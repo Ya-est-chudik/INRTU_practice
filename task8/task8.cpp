@@ -9,12 +9,196 @@ Adafruit_NeoPixel strip (NUMPIXELS, PIN, NEO_KHZ800 + NEO_GRB); // первый 
                                                                 // второй параметр - пин к которому подключен ряд
                                                                 // третий параметр - частота с которой посылаются сигналы
                                                                 // и какие цвета в очереди светодиоида
+
+uint32_t matrix[16][16];                 // Т.к светодиоиды расположены змейкой то и обращение к ним очень неудобное
+
+void zero(uint32_t x, uint32_t y, uint32_t c) { // отрисовка цифр от заданной координаты
+  for (uint32_t i = y; i <= y + 3; ++i) {
+    strip.setPixelColor(matrix[x][i], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = x; i <= x + 7; ++i) {
+    strip.setPixelColor(matrix[i][y], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = y; i <= y + 3; ++i) {
+    strip.setPixelColor(matrix[x + 7][i], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = x; i <= x + 7; ++i) {
+    strip.setPixelColor(matrix[i][y + 3], strip.Color(c, 0, 0));
+  }
+}
+
+void one(uint32_t x, uint32_t y, uint32_t c) {
+  for (uint32_t i = x; i <= x + 7; ++i) {
+    strip.setPixelColor(matrix[i][y + 3], strip.Color(c, 0, 0));
+  }
+}
+
+void two(uint32_t x, uint32_t y, uint32_t c) {
+  for (uint32_t i = y; i <= y + 3; ++i) {
+    strip.setPixelColor(matrix[x][i], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = y; i <= y + 3; ++i) {
+    strip.setPixelColor(matrix[x + 7][i], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = y; i <= y + 3; ++i) {
+    strip.setPixelColor(matrix[x + 4][i], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = x + 4; i <= x + 7; ++i) {
+    strip.setPixelColor(matrix[i][y], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = x; i <= x + 3; ++i) {
+    strip.setPixelColor(matrix[i][y + 3], strip.Color(c, 0, 0));
+  }
+}
+
+void three(uint32_t x, uint32_t y, uint32_t c) {
+  for (uint32_t i = y; i <= y + 3; ++i) {
+    strip.setPixelColor(matrix[x][i], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = y; i <= y + 3; ++i) {
+    strip.setPixelColor(matrix[x + 7][i], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = y; i <= y + 3; ++i) {
+    strip.setPixelColor(matrix[x + 4][i], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = x + 4; i <= x + 7; ++i) {
+    strip.setPixelColor(matrix[i][y + 3], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = x; i <= x + 3; ++i) {
+    strip.setPixelColor(matrix[i][y + 3], strip.Color(c, 0, 0));
+  }
+}
+
+void four(uint32_t x, uint32_t y, uint32_t c) {
+  for (uint32_t i = y; i <= y + 3; ++i) {
+    strip.setPixelColor(matrix[x + 4][i], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = x + 4; i <= x + 7; ++i) {
+    strip.setPixelColor(matrix[i][y + 3], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = x; i <= x + 3; ++i) {
+    strip.setPixelColor(matrix[i][y + 3], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = x; i <= x + 3; ++i) {
+    strip.setPixelColor(matrix[i][y], strip.Color(c, 0, 0));
+  }
+}
+
+void five(uint32_t x, uint32_t y, uint32_t c) {
+  for (uint32_t i = y; i <= y + 3; ++i) {
+    strip.setPixelColor(matrix[x][i], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = y; i <= y + 3; ++i) {
+    strip.setPixelColor(matrix[x + 7][i], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = y; i <= y + 3; ++i) {
+    strip.setPixelColor(matrix[x + 4][i], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = x + 4; i <= x + 7; ++i) {
+    strip.setPixelColor(matrix[i][y + 3], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = x; i <= x + 3; ++i) {
+    strip.setPixelColor(matrix[i][y], strip.Color(c, 0, 0));
+  }
+}
+
+void six(uint32_t x, uint32_t y, uint32_t c) {
+  for (uint32_t i = y; i <= y + 3; ++i) {
+    strip.setPixelColor(matrix[x][i], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = y; i <= y + 3; ++i) {
+    strip.setPixelColor(matrix[x + 7][i], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = y; i <= y + 3; ++i) {
+    strip.setPixelColor(matrix[x + 4][i], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = x + 4; i <= x + 7; ++i) {
+    strip.setPixelColor(matrix[i][y + 3], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = x; i <= x + 7; ++i) {
+    strip.setPixelColor(matrix[i][y], strip.Color(c, 0, 0));
+  }
+}
+
+void seven(uint32_t x, uint32_t y, uint32_t c) {
+  for (uint32_t i = y; i <= y + 3; ++i) {
+    strip.setPixelColor(matrix[x][i], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = x; i <= x + 7; ++i) {
+    strip.setPixelColor(matrix[i][y + 3], strip.Color(c, 0, 0));
+  }
+}
+
+void eight(uint32_t x, uint32_t y, uint32_t c) {
+  for (uint32_t i = y; i <= y + 3; ++i) {
+    strip.setPixelColor(matrix[x][i], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = x; i <= x + 7; ++i) {
+    strip.setPixelColor(matrix[i][y], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = y; i <= y + 3; ++i) {
+    strip.setPixelColor(matrix[x + 7][i], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = x; i <= x + 7; ++i) {
+    strip.setPixelColor(matrix[i][y + 3], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = y; i <= y + 3; ++i) {
+    strip.setPixelColor(matrix[x + 4][i], strip.Color(c, 0, 0));
+  }
+}
+
+void nine(uint32_t x, uint32_t y, uint32_t c) {
+  for (uint32_t i = y; i <= y + 3; ++i) {
+    strip.setPixelColor(matrix[x][i], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = y; i <= y + 3; ++i) {
+    strip.setPixelColor(matrix[x + 7][i], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = y; i <= y + 3; ++i) {
+    strip.setPixelColor(matrix[x + 4][i], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = x; i <= x + 7; ++i) {
+    strip.setPixelColor(matrix[i][y + 3], strip.Color(c, 0, 0));
+  }
+  for (uint32_t i = x; i <= x + 3; ++i) {
+    strip.setPixelColor(matrix[i][y], strip.Color(c, 0, 0));
+  }
+}
+
+void print_number(uint32_t num, uint32_t x, uint32_t y, uint32_t c) {
+  if (num == 0) {
+    zero(x, y, c);
+  } else if (num == 1) {
+    one(x, y, c);
+  } else if (num == 2) {
+    two(x, y, c);
+  } else if (num == 3) {
+    three(x, y, c);
+  } else if (num == 4) {
+    four(x, y, c);
+  } else if (num == 5) {
+    five(x, y, c);
+  } else if (num == 6) {
+    six(x, y, c);
+  } else if (num == 7) {
+    seven(x, y, c);
+  } else if (num == 8) {
+    eight(x, y, c);
+  } else if (num == 9) {
+    nine(x, y, c);
+  }
+}
+
+void del_num(uint32_t num, uint32_t x, uint32_t y) {
+  print_number(num, x, y, 0);
+}
+
+
 void setup() {
   strip.begin();                           // инициализируем ленту
   strip.setBrightness(50);                 // указываем яркость светодиодов (максимум 255)
 
-  uint32_t matrix[16][16];                 // Т.к светодиоиды расположены змейкой то и обращение к ним очень неудобное
-  uint32_t count = 0;                      // Я же сделаю чуть по-проще
+  uint32_t count = 0;
   for (int i = 0; i < 16; i++) {
     if (i % 2 == 0) {
       for (int j = 16 - 1; j >= 0; j--) {  // Теперь можна обращаться к светодиоидам matrix[строка][столбец]
@@ -67,92 +251,18 @@ void setup() {
   strip.show();
   delay(1000);
 
-  // таймер от 6 до 1
-
-  // Цифра 6
+  // таймер от 0 до 99
   strip.clear();
-  for (uint32_t i = 6; i <= 9; ++i) {
-    strip.setPixelColor(matrix[4][i], strip.Color(255, 0, 0));
-    strip.setPixelColor(matrix[8][i], strip.Color(255, 0, 0));
-    strip.setPixelColor(matrix[12][i], strip.Color(255, 0, 0));
+  for(uint32_t q = 0; q < 10; ++q) {
+    print_number(q, 3, 3, 255);
+    for(uint32_t z = 0; z < 10; ++z) {
+      print_number(z, 3, 8, 255);
+      strip.show();
+      del_num(z, 3, 8);
+      delay(1000);
+    }
+    del_num(q, 3, 3);
   }
-  for (uint32_t i = 4; i <= 12; ++i) {
-    strip.setPixelColor(matrix[i][6], strip.Color(255, 0, 0));
-  }
-  for (uint32_t i = 8; i <= 12; ++i) {
-    strip.setPixelColor(matrix[i][9], strip.Color(255, 0, 0));
-  }
-  strip.show();
-  delay(1000);
-  
-  // Цифра 5
-  strip.clear();
-  for (uint32_t i = 6; i <= 9; ++i) {
-    strip.setPixelColor(matrix[4][i], strip.Color(255, 0, 0));
-    strip.setPixelColor(matrix[8][i], strip.Color(255, 0, 0));
-    strip.setPixelColor(matrix[12][i], strip.Color(255, 0, 0));
-  }
-  for (uint32_t i = 4; i <= 8; ++i) {
-    strip.setPixelColor(matrix[i][6], strip.Color(255, 0, 0));
-  }
-  for (uint32_t i = 8; i <= 12; ++i) {
-    strip.setPixelColor(matrix[i][9], strip.Color(255, 0, 0));
-  }
-  strip.show();
-  delay(1000);
-
-  // Цифра 4
-  strip.clear();
-  for (uint32_t i = 6; i <= 9; ++i) {
-    strip.setPixelColor(matrix[8][i], strip.Color(255, 0, 0));
-  }
-  for (uint32_t i = 4; i <= 8; ++i) {
-    strip.setPixelColor(matrix[i][6], strip.Color(255, 0, 0));
-    strip.setPixelColor(matrix[i][9], strip.Color(255, 0, 0));
-  }
-  for (uint32_t i = 8; i <= 12; ++i) {
-    strip.setPixelColor(matrix[i][9], strip.Color(255, 0, 0));
-  }
-  strip.show();
-  delay(1000);
-
-  // Цифра 3
-  strip.clear();
-  for (uint32_t i = 6; i <= 9; ++i) {
-    strip.setPixelColor(matrix[4][i], strip.Color(255, 0, 0));
-    strip.setPixelColor(matrix[8][i], strip.Color(255, 0, 0));
-    strip.setPixelColor(matrix[12][i], strip.Color(255, 0, 0));
-  }
-  for (uint32_t i = 4; i <= 12; ++i) {
-    strip.setPixelColor(matrix[i][9], strip.Color(255, 0, 0));
-  }
-  strip.show();
-  delay(1000);
-
-  // Цифра 2
-  strip.clear();
-  for (uint32_t i = 6; i <= 9; ++i) {
-    strip.setPixelColor(matrix[4][i], strip.Color(255, 0, 0));
-    strip.setPixelColor(matrix[8][i], strip.Color(255, 0, 0));
-    strip.setPixelColor(matrix[12][i], strip.Color(255, 0, 0));
-  }
-  for (uint32_t i = 4; i <= 8; ++i) {
-    strip.setPixelColor(matrix[i][9], strip.Color(255, 0, 0));
-  }
-  for (uint32_t i = 8; i <= 12; ++i) {
-    strip.setPixelColor(matrix[i][6], strip.Color(255, 0, 0));
-  }
-  strip.show();
-  delay(1000);
-
-  // Цифра 1
-  strip.clear();
-  for (uint32_t i = 4; i <= 12; ++i) {
-    strip.setPixelColor(matrix[i][9], strip.Color(255, 0, 0));
-  }
-  strip.show();
-  delay(1000);
-
 }
 
 void loop() {
